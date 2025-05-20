@@ -1,0 +1,12 @@
+- NET (Visual Studio 2022 Community) => WINDOWS ... Opcion alterna = VSCode + C# Extension + SDK NET8
+- Visual Studio Code (Front - Angular)
+- SQL Server Management Studio - (((SQL Server))))
+- Compass (Manejar MongoDB)
+- Git (comando)
+- Docker (Windows - MAC) - Docker Compose.
+
+Cuentas:
+- Azure (Tarjeta Credito)
+- Mongo Atlas
+- Git (Github + Bitbucket + GitLab + AzureDevops Repository)
+- DockerHub
