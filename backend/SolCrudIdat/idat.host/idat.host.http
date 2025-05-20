@@ -1,0 +1,6 @@
+@idat.host_HostAddress = http://localhost:5175
+
+GET {{idat.host_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
