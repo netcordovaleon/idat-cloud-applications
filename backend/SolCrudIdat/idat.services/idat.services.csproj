@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\idat.domain\idat.domain.csproj" />
+    <ProjectReference Include="..\idat.entities\idat.entities.csproj" />
+    <ProjectReference Include="..\idat.shared\idat.shared.csproj" />
+  </ItemGroup>
+
 </Project>

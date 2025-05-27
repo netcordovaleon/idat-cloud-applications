@@ -1,5 +1,5 @@
 ﻿using idat.entities;
-using Microsoft.AspNetCore.Http;
+using idat.services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace idat.host.Controllers;
@@ -8,32 +8,33 @@ namespace idat.host.Controllers;
 [ApiController]
 public class ProductsController : ControllerBase
 {
+    private readonly IProductServices _productServices;
+    public ProductsController(IProductServices productServices)
+    {
+        _productServices = productServices;
+    }
 
-    //BEST PRACTICE = [www.algo.com]/api/products/100
-    //BAD PRACTICE = www.algo.com/api/products/getproductbyId/1
+
     [Route("{id}")]
     [HttpGet]
     public Product Get(int id) {
         throw new NotImplementedException();
     }
 
-    //BEST PRACTICE = [www.algo.com]/api/products
     [Route("")]
     [HttpGet]
-    public IEnumerable<Product> GetProducts() {
-        throw new NotImplementedException();
+    public async Task< IEnumerable<Product>> GetProducts() {
+       return  await _productServices.GetAll();
     }
 
 
-    //BEST PRACTICE = [www.algo.com]/api/products
     [Route("")]
     [HttpPost]
-    public Product SaveProduct(Product entity)
+    public async Task<Product> SaveProduct(Product entity)
     {
-        throw new NotImplementedException();
+        return await _productServices.SaveProduct(entity);
     }
 
-    //BEST PRACTICE = [www.algo.com]/api/products
     [Route("")]
     [HttpPatch]
     public Product UpdateProduct(Product entity)
@@ -41,7 +42,6 @@ public class ProductsController : ControllerBase
         throw new NotImplementedException();
     }
 
-    //BEST PRACTICE = [www.algo.com]/api/products/100
     [Route("{id}")]
     [HttpDelete]
     public Product DeleteProduct(int id)

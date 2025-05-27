@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "idat.shared", "idat.shared\idat.shared.csproj", "{D905857D-D2A8-402D-9220-BFC3A14A4062}"
 EndProject
@@ -12,6 +12,16 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "idat.services", "idat.services\idat.services.csproj", "{5B20FEBD-8153-4D2E-A8AF-1B0A741CDEDC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "idat.host", "idat.host\idat.host.csproj", "{61ACF82D-347E-4544-A39B-E0CC7D7C9C25}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01. Data Access", "01. Data Access", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00.Shared", "00.Shared", "{85DEBEBD-6EA3-4CBA-A41D-EA8B3C05BA0C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02. Business Logic", "02. Business Logic", "{48CC0FDF-50B8-48FE-9F8D-98751CDD8614}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03. Entities", "03. Entities", "{F9F38135-0A54-4D5F-8E61-4A8347D6EDE2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04. Presentation", "04. Presentation", "{D0D64185-DA5F-4D06-843B-92CAE0486CED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +52,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D905857D-D2A8-402D-9220-BFC3A14A4062} = {85DEBEBD-6EA3-4CBA-A41D-EA8B3C05BA0C}
+		{EE82B02F-3888-408A-85F7-211348636EAE} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{EFAA1879-050B-4ED6-8927-B68D3D037871} = {F9F38135-0A54-4D5F-8E61-4A8347D6EDE2}
+		{5B20FEBD-8153-4D2E-A8AF-1B0A741CDEDC} = {48CC0FDF-50B8-48FE-9F8D-98751CDD8614}
+		{61ACF82D-347E-4544-A39B-E0CC7D7C9C25} = {D0D64185-DA5F-4D06-843B-92CAE0486CED}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AF33ADAE-8F7B-4BE4-9075-873BD26030A1}
