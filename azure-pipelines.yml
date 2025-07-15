@@ -26,3 +26,8 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/backend/SolCrudIdat/Dockerfile'
         tags: |
           $(tag)
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'DockerLuisCordova'
+        repository: 'netcordovaleon/idat-crud'
+        command: 'push'
