@@ -11,58 +11,87 @@ variables:
   tag: '$(Build.BuildId)'
   dockerName: 'DockerLuisCordova'
 
-stages:
-#Stage de compilacion
-- stage: Build
-  displayName: Build without Test
-  jobs:
-  - job: Build
-    displayName: Build
-    pool:
-      vmImage: ubuntu-latest
-    steps:
-    - task: Docker@2
-      displayName: Build an image
-      inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/backend/SolCrudIdat/Dockerfile'
-        tags: |
-          $(tag)
-#Stage de prueba que emula la ejecucion de pruebas unitarias
-- stage: Test
-  displayName: Run testing
-  jobs:
-  - job: Testing
-    displayName: Testing
-    pool:
-      vmImage: ubuntu-latest
-    steps:
-    - task: PowerShell@2
-      inputs:
-        targetType: 'inline'
-        script: |
-          # Write your PowerShell commands here.
-          
-          Write-Host "Se ejecutaron las pruebas unitarias correctamente"
-#Stage que publica el artefacto listo para usarse en algun servidor o servicio cloud computing
-- stage: Publishing
-  displayName: Publish artefact
-  jobs:
-  - job: Publish
-    displayName: Publish
-    pool:
-      vmImage: ubuntu-latest
-    steps:
-    - task: Docker@2
-      displayName: Build an image
-      inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/backend/SolCrudIdat/Dockerfile'
-        tags: |
-          $(tag)
-    - task: Docker@2
-      inputs:
-        containerRegistry: $(dockerName)
-        repository: 'netcordovaleon/idat-crud'
-        command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
+#######################################################################################################################
+##### PIPELINE - Modelo lineal
+#######################################################################################################################
+
+steps:
+  - task: Docker@2
+    displayName: Build project
+    inputs:
+      command: build
+      dockerfile: '$(Build.SourcesDirectory)/backend/SolCrudIdat/Dockerfile'
+      tags: |
+        $(tag)
+  - task: PowerShell@2
+    displayName: Run UnitTest
+    inputs:
+      targetType: 'inline'
+      script: |
+        # Write your PowerShell commands here.
+  - task: Docker@2
+    displayName: Publish Artifact
+    inputs:
+      containerRegistry: $(dockerName)
+      repository: 'netcordovaleon/idat-crud'
+      command: 'buildAndPush'
+      Dockerfile: '**/Dockerfile'
+
+#######################################################################################################################
+##### PIPELINE - Modelo bajo Stages
+#######################################################################################################################
+#stages:
+##Stage de compilacion
+#- stage: Build
+#  displayName: Build without Test
+#  jobs:
+#  - job: Build
+#    displayName: Build
+#    pool:
+#      vmImage: ubuntu-latest
+#    steps:
+#    - task: Docker@2
+#      displayName: Build an image
+#      inputs:
+#        command: build
+#        dockerfile: '$(Build.SourcesDirectory)/backend/SolCrudIdat/Dockerfile'
+#        tags: |
+#          $(tag)
+##Stage de prueba que emula la ejecucion de pruebas unitarias
+#- stage: Test
+#  displayName: Run testing
+#  jobs:
+#  - job: Testing
+#    displayName: Testing
+#    pool:
+#      vmImage: ubuntu-latest
+#    steps:
+#    - task: PowerShell@2
+#      inputs:
+#        targetType: 'inline'
+#        script: |
+#          # Write your PowerShell commands here.
+#          
+#          Write-Host "Se ejecutaron las pruebas unitarias correctamente"
+##Stage que publica el artefacto listo para usarse en algun servidor o servicio cloud computing
+#- stage: Publishing
+#  displayName: Publish artefact
+#  jobs:
+#  - job: Publish
+#    displayName: Publish
+#    pool:
+#      vmImage: ubuntu-latest
+#    steps:
+#    - task: Docker@2
+#      displayName: Build an image
+#      inputs:
+#        command: build
+#        dockerfile: '$(Build.SourcesDirectory)/backend/SolCrudIdat/Dockerfile'
+#        tags: |
+#          $(tag)
+#    - task: Docker@2
+#      inputs:
+#        containerRegistry: $(dockerName)
+#        repository: 'netcordovaleon/idat-crud'
+#        command: 'buildAndPush'
+#        Dockerfile: '**/Dockerfile'
