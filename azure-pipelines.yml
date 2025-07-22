@@ -12,11 +12,44 @@ variables:
   dockerName: 'DockerLuisCordova'
 
 stages:
+#Stage de compilacion
 - stage: Build
-  displayName: Build image
+  displayName: Build without Test
   jobs:
   - job: Build
     displayName: Build
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: Docker@2
+      displayName: Build an image
+      inputs:
+        command: build
+        dockerfile: '$(Build.SourcesDirectory)/backend/SolCrudIdat/Dockerfile'
+        tags: |
+          $(tag)
+#Stage de prueba que emula la ejecucion de pruebas unitarias
+- stage: Test
+  displayName: Run testing
+  jobs:
+  - job: Testing
+    displayName: Testing
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Write your PowerShell commands here.
+          
+          Write-Host "Se ejecutaron las pruebas unitarias correctamente"
+#Stage que publica el artefacto listo para usarse en algun servidor o servicio cloud computing
+- stage: Publishing
+  displayName: Publish artefact
+  jobs:
+  - job: Publish
+    displayName: Publish
     pool:
       vmImage: ubuntu-latest
     steps:
@@ -33,33 +66,3 @@ stages:
         repository: 'netcordovaleon/idat-crud'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
-- stage: paso2
-  displayName: Build image
-  jobs:
-  - job: Build
-    displayName: Build
-    pool:
-      vmImage: ubuntu-latest
-    steps:
-    - task: Docker@2
-      displayName: Build an image
-      inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/backend/SolCrudIdat/Dockerfile'
-        tags: |
-          $(tag)
-- stage: paso3
-  displayName: Build image
-  jobs:
-  - job: Build
-    displayName: Build
-    pool:
-      vmImage: ubuntu-latest
-    steps:
-    - task: Docker@2
-      displayName: Build an image
-      inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/backend/SolCrudIdat/Dockerfile'
-        tags: |
-          $(tag)
